@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0 user-scalable=no width=device-width">
+        <title>Injam Web Samples</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <link type="text/css" rel="stylesheet" href="css/injam.samples.css">
+    </head>
+    <body>
+        <main>
+            {% block content %} {% endblock %}
+            {% include "templates/partials/footer.html" %}
+        </main>
+
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        <script async src="js/injam.samples.js"></script>
+        {%block javascripts %}{% endblock %}
+    </body>
+</html>

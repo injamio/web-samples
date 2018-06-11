@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0 user-scalable=no width=device-width">
+        <title>Injam Web Samples</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <link type="text/css" rel="stylesheet" href="css/injam.samples.css">
+    </head>
+    <body>
+        <main>
+            
+    <div class="container">
+        <h2>Injam Web Samples</h2>
+        <h4><a href="index.html">←</a> Showing Objects on Map by markers <small>(using open street map)</small></h4>
+        <p>This example works well for both single or multiple markers cases. just subscribe more devices to see more markers.</p>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="ha-actions z-depth-4">
+        <div class="row valign-wrapper">
+            <div class="input-field col s8">
+                <input placeholder="Enter physical id of a device" id="subscription" type="text">
+                <label for="subscription">Subscriction</label>
+            </div>
+            <div class="col s4">
+                <a class="waves-effect waves-teal btn-flat sub">Sub</a>
+                <a class="waves-effect waves-red btn-flat unsub">Unsub</a>
+            </div>
+        </div>
+    </div>
+
+            <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <p><a target="_blank" href="https://injam.io/">Injam</a>, Next generation Real-Time machine.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5>Need help?</h5>
+                <ul>
+                    <li><a target="_blank" href="https://injam.io/docs">Docs</a></li>
+                    <li><a target="_blank" href="https://injam.io/sdk">SDK</a></li>
+                    <li><a target="_blank" href="https://github.com/injamio/">Github</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+        </main>
+
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        <script async src="js/injam.samples.js"></script>
+        
+    
+    <script>
+        function initMap() {
+            connectForOpenStreetMap()
+        }
+    </script>
+
+    </body>
+</html>

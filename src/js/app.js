@@ -109,6 +109,84 @@ window.deleteMarkersGMaps = function() {
 
 window.connectForOpenStreetMap = function() {
 
+    // Connect to Injam
+
+    window.injam = new Injam(credentials)
+    injam.connect()
+
+    injam.on('subscribed', function (channel) {
+        M.toast({html: 'Subscribed ' + channel})
+    })
+
+    injam.on('unsubscribed', function (channel) {
+        M.toast({html: 'Unsubscribed ' + channel})
+    })
+
+
+    // Showing devices on Open Street Map by markers when receiving location data
+
+    injam.on('tracking', function (data) {
+        if (markers[data.channel]) {
+            var lonLat = ol.proj.transform([data.location.lng, data.location.lat], 'EPSG:4326', 'EPSG:3857')
+            markers[data.channel].setCoordinates(lonLat)
+            // Uncomment below if you want lock to one marker
+            // view.animate({
+            //     center: lonLat,
+            //     duration: 2000
+            // })
+        } else {
+            addMarkerOSM(data.channel, {lat: data.location.lat, lng: data.location.lng})
+            var lonLat = ol.proj.transform([data.location.lng, data.location.lat], 'EPSG:4326', 'EPSG:3857')
+            view.animate({
+                center: lonLat,
+                duration: 2000
+            })
+        }
+    })
+
+
+    // Open Street Map init
+
+    window.markerSource = new ol.source.Vector()
+    window.markerStyle = new ol.style.Style({
+        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+            anchor: [0.5, 46],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'https://injam.io/images/Marker-Red.svg'
+        }))
+    })
+    window.view = new ol.View({
+        center: ol.proj.fromLonLat([Asia.lng, Asia.lat]),
+        zoom: 3
+    })
+
+    window.map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+          new ol.layer.Vector({
+            source: markerSource,
+            style: markerStyle
+          }),
+        ],
+        view: view
+    })
+
+}
+
+
+// Most useful Open Street Map functions
+
+window.addMarkerOSM = function(id, location) {
+    markers[id] = new ol.geom.Point(ol.proj.transform([location.lng, location.lat], 'EPSG:4326', 'EPSG:3857'))
+    var marker = new ol.Feature({
+        geometry: markers[id],
+        name: id
+    })
+    markerSource.addFeature(marker)
 }
 
 

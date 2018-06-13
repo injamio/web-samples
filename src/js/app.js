@@ -9,9 +9,9 @@ window.markers = []
 // Put your physical id and application key
 
 window.credentials = {
-    physical_id: 'YOUR_PHYSICAL_ID',
+    physical_id: 'qwerty',
     channels: [],
-    application_key: 'YOUR_APPLICATION_KEY'
+    application_key: '8e4e2470-8a7f-11e7-a8eb-af48a618a2dd'
 }
 
 
@@ -209,17 +209,24 @@ window.connectForMessaging = function() {
     })
 
     injam.on('rawData', function (data) {
-        var message = data.data || data.message || data.body
-        $('#board .messages').prepend('<div class="message-holder"><div class="message">'
-        + '<span class="title">' + data.channel + '</span>'
-        + '<p class="body">' + message + '</p>'
-        + '</div></div>')
+        addMessage(data)
     })
 
 }
 
 if ($('#board').length) {
     connectForMessaging()
+}
+
+
+
+window.addMessage = function(data) {
+    var name = data.channel || credentials.physical_id
+    var message = data.data || data.message || data.body
+    $('#board .messages').prepend('<div class="message-holder"><div class="message">'
+        + '<span class="title">' + name + '</span>'
+        + '<p class="body">' + message + '</p>'
+    + '</div></div>')
 }
 
 
@@ -251,6 +258,8 @@ $('.unsub').on('click', function(e) {
 $('.send').on('click', function(e) {
     e.preventDefault()
     var data = $('#data').val()
-    if (data != '')
+    if (data != '') {
         injam.publish(data)
+        addMessage(data)
+    }
 })

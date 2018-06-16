@@ -4,7 +4,12 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
+    "install": "napa",
+    "i": "napa",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "napa": {
+    "cedarmaps": "http://gitlab.cedar.ir/cedar.studios/cedarmaps-sdk-web-public/repository/archive.tar.gz"
   },
   "author": "Injam SDK Team <sdk@injam.io> (https://injam.io)",
   "license": "ISC",

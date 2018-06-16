@@ -23,6 +23,16 @@ window.Asia = {
     lng: 62.4289998
 }
 
+window.Iran = {
+    lat: 31.9927359,
+    lng: 44.6737631
+}
+
+window.Tehran = {
+    lat: 35.6970118,
+    lng: 51.2097338
+}
+
 
 
 // Google Maps Sample
@@ -187,6 +197,82 @@ window.addMarkerOSM = function(id, location) {
         name: id
     })
     markerSource.addFeature(marker)
+}
+
+
+
+// Cedar Maps Sample
+
+window.connectForCedarMaps = function() {
+
+    // Connect to Injam
+
+    window.injam = new Injam(credentials)
+    injam.connect()
+
+    injam.on('subscribed', function (channel) {
+        M.toast({html: 'Subscribed ' + channel})
+    })
+
+    injam.on('unsubscribed', function (channel) {
+        M.toast({html: 'Unsubscribed ' + channel})
+    })
+
+
+    // Showing devices on Cedar Maps by markers when receiving location data
+
+    injam.on('tracking', function (data) {
+        if (markers[data.channel]) {
+            var latLng = L.latLng(data.location)
+            markers[data.channel].setLatLng(latLng)
+            // Uncomment below if you want lock to one marker
+            // map.setView(data.location)
+        } else {
+            addMarkerCM(data.channel, {lat: data.location.lat, lng: data.location.lng})
+            map.setView(data.location)
+        }
+    })
+
+
+    // Cedar Maps init
+
+    var cmOptions = {
+        center: {lat: Tehran.lat, lng: Tehran.lng},
+        scrollWheelZoom :false,
+        zoomControl: true,
+        zoom: 7,
+        minZoom: 6,
+        maxZoom: 17,
+        legendControl: false,
+        attributionControl: false
+    }
+    window.map = L.cedarmaps.map('map', 'https://api.cedarmaps.com/v1/tiles/cedarmaps.streets.json?access_token=8b5bc03a7ce664a403940ee68357e7c44240609e', cmOptions)
+
+}
+
+
+// Most useful Cedar Maps functions
+
+window.addMarkerCM = function(id, location) {
+    var markerOptions = {
+        center: {lat: location.lat, lng: location.lng},
+        iconOpts: {
+            iconUrl: "https://injam.io/images/Marker-Red.svg",
+            iconRetinaUrl: "https://injam.io/images/Marker-Red.svg",
+            iconSize: [32, 44]
+        }
+    }
+    var iconOptions = {
+        iconUrl: markerOptions.iconOpts.iconUrl,
+        iconRetinaUrl: markerOptions.iconOpts.iconRetinaUrl,
+        iconSize: markerOptions.iconOpts.iconSize
+    }
+    var markerIcon = {
+        icon: L.icon(iconOptions)
+    }
+    var marker = new L.marker(markerOptions.center, markerIcon)
+    marker.addTo(map)
+    markers[id] = marker
 }
 
 

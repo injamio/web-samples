@@ -19,29 +19,23 @@
             
     <div class="container">
         <h2>Injam Web Samples</h2>
+        <h4><a href="index.html">←</a> Showing Objects by markers on Cedar Maps <small>(using Leaflet)</small></h4>
+        <p>This example works well for both single or multiple markers cases. just subscribe more devices to see more markers.</p>
+    </div>
 
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>All Samples</h4></li>
+    <div id="map"></div>
 
-            <li class="collection-item">
-                <a href="markers-google-maps.html"><b>Showing Objects by markers on Google Maps</b></a>
-                <small>JS API V3</small>
-            </li>
-            
-            <li class="collection-item">
-                <a href="markers-openstreetmap.html"><b>Showing Objects by markers on Open Street Map</b></a>
-                <small>OpenLayers</small>
-            </li>
-
-            <li class="collection-item">
-                <a href="markers-cedarmaps.html"><b>Showing Objects by markers on Cedar Maps</b></a>
-                <small>Leaflet</small>
-            </li>
-            
-            <li class="collection-item">
-                <a href="messaging.html"><b>Messaging</b></a>
-            </li>
-        </ul>
+    <div class="ha-actions z-depth-4">
+        <div class="row valign-wrapper">
+            <div class="input-field col s8">
+                <input placeholder="Enter physical id of a device" id="subscription" type="text">
+                <label for="subscription">Subscriction</label>
+            </div>
+            <div class="col s4">
+                <a class="waves-effect waves-teal btn-flat sub">Sub</a>
+                <a class="waves-effect waves-red btn-flat unsub">Unsub</a>
+            </div>
+        </div>
     </div>
 
             <footer class="footer">
@@ -67,5 +61,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
         <script async src="js/injam.samples.js"></script>
         
+    <link href='https://api.cedarmaps.com/cedarmaps.js/v1.8.0/cedarmaps.css' rel='stylesheet' />
+    <script>
+        (function(c, e, d, a){
+            var p = c.createElement(e)
+            p.async = 1; p.src = d
+            p.onload = a
+            c.body.appendChild(p)
+        })(document, 'script', 'https://api.cedarmaps.com/cedarmaps.js/v1.8.0/cedarmaps.js', connect)
+        function connect() {
+            connectForCedarMaps()
+        }
+    </script>
+
     </body>
 </html>

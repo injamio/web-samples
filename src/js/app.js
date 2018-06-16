@@ -9,9 +9,9 @@ window.markers = []
 // Put your physical id and application key
 
 window.credentials = {
-    physical_id: 'qwerty',
+    physical_id: 'demolx85b',
     channels: [],
-    application_key: '8e4e2470-8a7f-11e7-a8eb-af48a618a2dd'
+    application_key: 'd144dd40-f7ad-11e7-9660-61d5f7592493'
 }
 
 

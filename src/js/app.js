@@ -343,8 +343,8 @@ $('.unsub').on('click', function(e) {
 
 $('.send').on('click', function(e) {
     e.preventDefault()
-    var data = $('#data').val()
-    if (data != '') {
+    var data = {message: $('#data').val()}
+    if (data.message != '') {
         injam.publish(data)
         addMessage(data)
     }

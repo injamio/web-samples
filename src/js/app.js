@@ -309,7 +309,7 @@ if ($('#board').length) {
 window.addMessage = function(data) {
     var name = data.channel || credentials.physical_id
     var message = data.data || data.message || data.body
-    $('#board .messages').prepend('<div class="message-holder"><div class="message">'
+    $('#board .messages').append('<div class="message-holder"><div class="message">'
         + '<span class="title">' + name + '</span>'
         + '<p class="body">' + message + '</p>'
     + '</div></div>')
@@ -347,5 +347,6 @@ $('.send').on('click', function(e) {
     if (data.message != '') {
         injam.publish(data)
         addMessage(data)
+        $('#data').val('')
     }
 })
